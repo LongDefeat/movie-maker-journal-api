@@ -101,7 +101,7 @@ router.get("/movie/:movie_id/recommendations", async (req, res, next) => {
 
 router.get("/genres", async (req, res, next) => {
   try {
-    const response = await axios.get(`${BASE_URL}/genres`, {
+    const response = await axios.get(`${BASE_URL}/genre/movie/list`, {
       params: {
         api_key: API_KEY,
       },
