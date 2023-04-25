@@ -70,9 +70,13 @@ router.get("/movie/:movie_id", async (req, res, next) => {
     const castResponse = await axios.get(
       `${BASE_URL}/movie/${movie_id}/credits?api_key=${API_KEY}`
     );
+    // const movieRatingResponse = await axios.get(
+    //   `${BASE_URL}/movie/${movie_id}/ratings?=api_key=${API_KEY}`
+    // );
     const data = {};
     data.details = detailsResponse.data;
     data.cast = castResponse.data.cast;
+    data.movieRatings;
     data.providers = providerResponse.data.results.US;
     console.log(data);
     return res.json({ data });
@@ -112,9 +116,43 @@ router.get("/genres", async (req, res, next) => {
   }
 });
 
+router.get("/movie/:movie_id/ratings", async (req, res, next) => {
+  const { movie_id } = req.params;
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${movie_id}/ratings`, {
+      params: {
+        api_key: API_KEY,
+      },
+    });
+    return res.json(response.data);
+  } catch (err) {
+    res.send(NotFoundError);
+  }
+});
+
 /** Get watch providers
  *
  * /movie/{movie_id}/watch/providers
  */
+router.get(
+  "/movie/:movie_id/watch/providers/:countryCode",
+  async (req, res, next) => {
+    const { movie_id, countryCode } = req.params;
+    console.log(movie_id, countryCode);
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/movie/${movie_id}/watch/providers?${API_KEY}&country=${countryCode}`,
+        {
+          params: {
+            api_key: API_KEY,
+          },
+        }
+      );
+      return res.json(response.data);
+    } catch (err) {
+      res.send(NotFoundError);
+    }
+  }
+);
 
 module.exports = router;
