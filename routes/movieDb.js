@@ -138,19 +138,34 @@ router.get(
   "/movie/:movie_id/watch/providers/:countryCode",
   async (req, res, next) => {
     const { movie_id, countryCode } = req.params;
-    console.log(movie_id, countryCode);
+
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/${movie_id}/watch/providers?${API_KEY}&country=${countryCode}`,
+        `${BASE_URL}/movie/${movie_id}/watch/providers`,
         {
           params: {
             api_key: API_KEY,
+            country: countryCode,
           },
         }
       );
-      return res.json(response.data);
+
+      // Check if response is successful
+      if (response.status !== 200 || !response.data.results) {
+        return res
+          .status(500)
+          .json({ error: "Failed to retrieve watch providers" });
+      }
+
+      // Filter data to only include flatrate providers for the specified country
+      const countryProviders = response.data.results[countryCode].flatrate;
+      console.log(countryProviders);
+      return res.json(countryProviders);
     } catch (err) {
-      res.send(NotFoundError);
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Failed to retrieve watch providers" });
     }
   }
 );
