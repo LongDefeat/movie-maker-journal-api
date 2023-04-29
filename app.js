@@ -14,6 +14,7 @@ const usersRoutes = require("./routes/users");
 const movieDbRoutes = require("./routes/movieDb");
 const journalRoutes = require("./routes/journals");
 const movieRoutes = require("./routes/userMovies");
+const general = require("./routes/general");
 
 const morgan = require("morgan");
 
@@ -24,29 +25,28 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
 
-
-app.use('/moviedb', movieDbRoutes);
+app.use("/moviedb", movieDbRoutes);
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/journals", journalRoutes);
 app.use("/movies", movieRoutes);
+app.use("/", general);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
-    return next(new NotFoundError());
+  return next(new NotFoundError());
 });
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
-    if (process.env.NODE_ENV !== "test") console.error(err.stack);
-    const status = err.status || 500;
-    const message = err.message;
+  if (process.env.NODE_ENV !== "test") console.error(err.stack);
+  const status = err.status || 500;
+  const message = err.message;
 
-    return res.status(status).json({
-        error: { message, status },
-    });
+  return res.status(status).json({
+    error: { message, status },
+  });
 });
-  
+
 module.exports = app;
-  
