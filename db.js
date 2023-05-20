@@ -1,17 +1,18 @@
 "use strict";
 /** Database setup for movie maker journal. */
-const { Client } = require("pg");
+// const { Client } = require("pg");
+const { Pool } = require("pg");
 
-const client = new Client({
-  host: process.env.PGHOST,
-  port: process.env.PGPORT,
-  user: process.env.PGUSER,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+// let client = new Client({
+//   host: process.env.PGHOST,
+//   port: process.env.PGPORT,
+//   user: process.env.PGUSER,
+//   database: process.env.PGDATABASE,
+//   password: process.env.PGPASSWORD,
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+// });
 
 // const client = new Client({
 //   host: 'my.database-server.com',
@@ -22,10 +23,10 @@ const client = new Client({
 // })
 const { getDatabaseUri } = require("./config");
 
-let db;
+let client;
 
 if (process.env.NODE_ENV === "production") {
-  db = new Client({
+  client = new Pool({
     host: process.env.PGHOST,
     port: process.env.PGPORT,
     user: process.env.PGUSER,
@@ -36,24 +37,29 @@ if (process.env.NODE_ENV === "production") {
     },
   });
 } else {
-  db = new Client({
-    host: "http://localhost",
-    port: "5432",
+  client = new Pool({
+    host: "localhost",
+    port: 5432,
     user: "mason",
     database: "mmj",
-    password: "",
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    password: "secretpassword!!",
+    ssl: false,
   });
 }
+// (async () => {})();
 
-db.connect();
+try {
+  client.connect();
+} catch (err) {
+  console.log(err);
+}
 
-db.query("SELECT * FROM public.user", async (err, res) => {
+client.query("SELECT * FROM public.user", async (err, res) => {
+  console.log("connnnnnt");
   if (err) throw err;
+  console.log("nat");
   console.log(await res);
-  client.end();
+  // client.end();
 });
 
 module.exports = client;
