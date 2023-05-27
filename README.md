@@ -14,7 +14,7 @@ The purpose of this app is purely to display modern programming practices in Rea
 
 
 # Demos
-Live demo:
+Live demo: [Check it out!](https://movie-maker-journal-app-5v8c-q8resdujf-longdefeat.vercel.app/)
 
 # Dependencies
 - Express: ^4.18.1
