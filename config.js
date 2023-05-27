@@ -31,7 +31,7 @@ console.log("---");
 
 module.exports = {
   SECRET_KEY,
-  PORT,
+  PGPORT,
   BCRYPT_WORK_FACTOR,
   getDatabaseUri,
 };
