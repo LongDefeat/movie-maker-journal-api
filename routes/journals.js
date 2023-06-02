@@ -31,7 +31,7 @@ router.get("/:user_id/journal-entries", async function (req, res, next) {
     const movieData = resolved.map((prom) => {
       return prom.data;
     });
-    console.log(movieData);
+    console.log("movieData from journals.js in backend: ", movieData);
     return res.json({ journalEntries });
   } catch (err) {
     return next(err);
