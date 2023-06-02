@@ -49,7 +49,7 @@ app.use(authenticateJWT);
 //   });
 // });
 
-app.get((req, res) => {
+app.get("/", (req, res) => {
   res.send("hi");
 });
 
