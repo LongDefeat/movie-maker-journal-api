@@ -30,7 +30,7 @@ app.use("/moviedb", movieDbRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/journals", journalRoutes);
-// app.use("/movies", movieRoutes);
+app.use("/movies", movieRoutes);
 // app.use("/", general);
 
 // /** Handle 404 errors -- this matches everything */
