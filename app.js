@@ -31,7 +31,7 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/journals", journalRoutes);
 app.use("/movies", movieRoutes);
-// app.use("/", general);
+app.use("/", general);
 
 // /** Handle 404 errors -- this matches everything */
 // app.use(function (req, res, next) {
