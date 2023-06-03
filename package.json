@@ -13,7 +13,7 @@
     "jsonschema": "^1.4.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "node": "^v16.15.1",
+    "node": "^16.15.1",
     "npm": "^8.11.0",
     "pg": "^8.8.0"
   },
@@ -24,7 +24,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
-    },
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
