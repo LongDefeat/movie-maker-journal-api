@@ -17,10 +17,6 @@
     "npm": "^8.11.0",
     "pg": "^8.8.0"
   },
-  // "scripts": {
-  //   "dev": "NODE_ENV=development nodemon server.js",
-  //   "start": "NODE_ENV=production node server.js"
-  // },
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
