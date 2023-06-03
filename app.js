@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
 
-// app.use("/moviedb", movieDbRoutes);
+app.use("/moviedb", movieDbRoutes);
 
 // app.use("/auth", authRoutes);
 // app.use("/users", usersRoutes);
