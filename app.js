@@ -28,7 +28,7 @@ app.use(authenticateJWT);
 app.use("/moviedb", movieDbRoutes);
 
 app.use("/auth", authRoutes);
-// app.use("/users", usersRoutes);
+app.use("/users", usersRoutes);
 // app.use("/journals", journalRoutes);
 // app.use("/movies", movieRoutes);
 // app.use("/", general);
